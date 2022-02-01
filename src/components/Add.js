@@ -10,6 +10,7 @@ class Add extends React.Component {
 
     this.updateProductName = this.updateProductName.bind(this);
     this.updatePrice = this.updatePrice.bind(this);
+    this.click = this.click.bind(this);
   }
 
   updateProductName(e) {
@@ -18,12 +19,16 @@ class Add extends React.Component {
     });
   }
   updatePrice(e) {
-    this.state({
+    this.setState({
       price: e.target.value,
     });
   }
   click = () => {
     this.props.addItem(this.state.productName, this.state.price);
+    this.setState({
+      productName: "",
+      price: 1,
+    });
   };
   render() {
     return (
@@ -33,6 +38,7 @@ class Add extends React.Component {
             type="text"
             className="col-10"
             onChange={this.updateProductName}
+            value={this.state.productName}
           ></input>
           <button
             type="text"

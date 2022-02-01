@@ -44,6 +44,9 @@ class App extends React.Component {
     };
     const newList = this.state.items;
     newList.push(obj);
+    newList.sort(function (a, b) {
+      return a.price - b.price;
+    });
     this.setState({
       items: newList,
     });
