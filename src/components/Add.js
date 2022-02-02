@@ -56,6 +56,7 @@ class Add extends React.Component {
             min="1"
             max="10"
           ></input>
+
           <span>{this.state.price}</span>
         </div>
       </div>

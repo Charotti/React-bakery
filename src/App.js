@@ -12,12 +12,14 @@ class App extends React.Component {
     this.state = {
       activeTab: "add",
       items: [],
+      total: 0,
     };
 
     this.selectAdd = this.selectAdd.bind(this);
     this.selectList = this.selectList.bind(this);
     this.selectPay = this.selectPay.bind(this);
     this.add = this.add.bind(this);
+    this.totalSum = this.totalSum.bind(this);
   }
 
   selectAdd(e) {
@@ -47,9 +49,15 @@ class App extends React.Component {
     newList.sort(function (a, b) {
       return a.price - b.price;
     });
-    this.setState({
-      items: newList,
-    });
+    this.setState({ items: newList });
+  }
+
+  totalSum() {
+    let newTotalSum = 0;
+    for (let i = 0; i < this.state.items.length; i++)
+      newTotalSum += parseInt(this.state.items[i].price);
+
+    return newTotalSum;
   }
 
   renderContent = () => {
@@ -59,7 +67,7 @@ class App extends React.Component {
       case "list":
         return <List listItems={this.state.items}></List>;
       case "pay":
-        return <Pay></Pay>;
+        return <Pay totalSum={this.totalSum()}></Pay>;
       default:
         return null;
     }
